@@ -39,6 +39,12 @@
 
 #ifdef SFML_SYSTEM_WINDOWS
 
+#if defined(__CYGWIN__)
+// cygwin does not provide these via stdlib.h
+extern int       __argc;
+extern char**    __argv;
+#endif
+
 #include <windows.h>
 
 extern int main(int argc, char* argv[]);

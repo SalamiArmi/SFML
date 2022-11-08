@@ -31,6 +31,37 @@
 #include <cassert>
 #include <process.h>
 
+#if __CYGWIN__
+
+// this isn't right at all, but will allow this to compile on cygwin for now.
+
+typedef void(__cdecl* _beginthread_proc_type)(void*);
+typedef unsigned(__stdcall* _beginthreadex_proc_type)(void*);
+
+auto _beginthreadex(
+    _In_opt_  void* _Security,
+    _In_      unsigned                 _StackSize,
+    _In_      _beginthreadex_proc_type _StartAddress,
+    _In_opt_  void* _ArgList,
+    _In_      unsigned                 _InitFlag,
+    _Out_opt_ unsigned* _ThrdAddr)
+{
+    return CreateThread(
+        (LPSECURITY_ATTRIBUTES)_Security,
+        (SIZE_T)_StackSize,
+        (LPTHREAD_START_ROUTINE)_StartAddress,
+        (LPVOID)_ArgList,
+        (DWORD)_InitFlag,
+        (LPDWORD)_ThrdAddr
+    );
+}
+
+auto _endthreadex(
+    _In_ unsigned _ReturnCode)
+{
+}
+
+#endif
 
 namespace sf
 {

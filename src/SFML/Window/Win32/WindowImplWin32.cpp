@@ -340,7 +340,7 @@ void WindowImplWin32::setSize(const Vector2u& size)
 {
     // SetWindowPos wants the total size of the window (including title bar and borders),
     // so we have to compute it
-    RECT rectangle = {0, 0, static_cast<long>(size.x), static_cast<long>(size.y)};
+    RECT rectangle = {0, 0, static_cast<LONG>(size.x), static_cast<LONG>(size.y)};
     AdjustWindowRect(&rectangle, GetWindowLong(m_handle, GWL_STYLE), false);
     int width  = rectangle.right - rectangle.left;
     int height = rectangle.bottom - rectangle.top;

@@ -1,5 +1,5 @@
 # detect the OS
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+if((${CMAKE_SYSTEM_NAME} STREQUAL "Windows") OR (${CYGWIN}))
     set(SFML_OS_WINDOWS 1)
 
     # don't use the OpenGL ES implementation on Windows

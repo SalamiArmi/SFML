@@ -38,7 +38,7 @@
 // Identify the operating system
 // see http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system
 ////////////////////////////////////////////////////////////
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(__CYGWIN__)
 
     // Windows
     #define SFML_SYSTEM_WINDOWS
